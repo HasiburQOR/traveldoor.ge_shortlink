@@ -1,0 +1,16 @@
+services:
+  shortlink:
+    build: .
+    restart: unless-stopped
+    environment:
+      BASE_URL: ${BASE_URL:?set BASE_URL, e.g. https://go.traveldoor.ge}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASS: ${ADMIN_PASS:?set ADMIN_PASS}
+      ROOT_REDIRECT: ${ROOT_REDIRECT:-https://traveldoor.ge}
+    volumes:
+      - shortlink-data:/data
+    expose:
+      - "8080"
+
+volumes:
+  shortlink-data:
